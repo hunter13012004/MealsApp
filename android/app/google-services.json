@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "728447659284",
+    "project_id": "majorproject-c5c5f",
+    "storage_bucket": "majorproject-c5c5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728447659284:android:6781aa7bce715c5f0f2601",
+        "android_client_info": {
+          "package_name": "com.example.majorproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy7JDqtGcK9dNW5sTNg_H2k2N7_u_xSLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728447659284:android:259b9dca6914ef010f2601",
+        "android_client_info": {
+          "package_name": "com.example.mealsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy7JDqtGcK9dNW5sTNg_H2k2N7_u_xSLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728447659284:android:104183832b8b90750f2601",
+        "android_client_info": {
+          "package_name": "dev.muhammadfiaz.fuzz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy7JDqtGcK9dNW5sTNg_H2k2N7_u_xSLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
