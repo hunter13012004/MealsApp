@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class restrocard extends StatelessWidget {
   final String image;
@@ -31,13 +33,15 @@ class restrocard extends StatelessWidget {
                   borderRadius: BorderRadiusDirectional.only(
                       topEnd: Radius.circular(20),
                       topStart: Radius.circular(20)),
-                  child: Image.asset(
+                  child: Image.network(
                     image,
-                    width: double.infinity,
+                    
+                    fit: BoxFit.cover,
+                    
                   )),
               Container(
                 height: 100,
-                width: double.infinity,
+                width: 360,
                 decoration: BoxDecoration(
                   color: secondarycolor,
                   border: Border.all(color: primarycolor),
@@ -54,12 +58,14 @@ class restrocard extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            restroname,
-                            style: TextStyle(
-                                fontSize: 24,
-                                color: textcolor,
-                                fontWeight: FontWeight.bold),
+                          Expanded(
+                            child: Text(
+                              restroname,
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: textcolor,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -80,12 +86,14 @@ class restrocard extends StatelessWidget {
                           )
                         ],
                       ),
-                      Text(
-                        subtitle,
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: textcolor,
-                            fontWeight: FontWeight.normal),
+                      Expanded(
+                        child: Text(
+                          subtitle,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: textcolor,
+                              fontWeight: FontWeight.normal),
+                        ),
                       ),
                       Row(
                         children: [

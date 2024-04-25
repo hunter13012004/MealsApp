@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/model/localdatamodel.dart';
+import 'package:mealsapp/model/recipe.dart';
+import 'package:mealsapp/model/recipeApi.dart';
 import 'package:mealsapp/pages/cartpage.dart';
 import 'package:mealsapp/pages/favouritrestro.dart';
 import 'package:mealsapp/pages/loginpage.dart';
@@ -20,23 +22,23 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  // List<Recipe> _recipes = [];
-  // bool isloading = true;
+  List<Recipe> _recipes = [];
+  bool isloading = true;
 
 
-  // @override
-  // void initState() {
-  //   _getRecipes();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    _getRecipes();
+    super.initState();
+  }
 
-  // Future<void> _getRecipes() async {
-  //   _recipes = await recipeApi.getrecipe();
-  //   setState(() {
-  //     isloading = false;
-  //   });
-  //   print(_recipes);
-  // }
+  Future<void> _getRecipes() async {
+    _recipes = await recipeApi.getrecipe();
+    setState(() {
+      isloading = false;
+    });
+  
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,18 +211,18 @@ class _HomepageState extends State<Homepage> {
                 ),
                 // whats on your mind tab
                 customdivider(dividertext: 'WHAT\S ON YOUR MIND'),
-              ListView.builder(
-                    itemCount: recipedata.length,
+             isloading? Center(child: CircularProgressIndicator(),): ListView.builder(
+                    itemCount: _recipes.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return restrocard(
 
-                          image: recipedata[index].image,
-                          restroname: recipedata[index].name,
-                          subtitle: recipedata[index].name,
-                          time: recipedata[index].time,
-                          rating: recipedata[index].rating.toString(),
+                          image: _recipes[index].thumbnail,
+                          restroname: _recipes[index].name,
+                          subtitle: _recipes[index].name,
+                          time: _recipes[index].totaltime,
+                          rating: _recipes[index].rating.toString(),
                           ontap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>restroPage( restromodel: recipedata[index],)));});
                     })
 
