@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mealsapp/firebase_options.dart';
 import 'package:mealsapp/pages/homepage.dart';
 import 'package:mealsapp/pages/loginpage.dart';
+import 'package:mealsapp/pages/splashscreen.dart';
 
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Homepage(),
+      home: SplashScreen(),
     );
   }
 }

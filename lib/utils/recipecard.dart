@@ -37,7 +37,7 @@ class RecipeCard extends StatelessWidget {
             backgroundcolor.withOpacity(0.70),
             BlendMode.multiply,
           ),
-          image: AssetImage(thumbnailUrl),
+          image: NetworkImage(thumbnailUrl),
           fit: BoxFit.cover,
         ),
       ),
@@ -104,7 +104,7 @@ class RecipeCard extends StatelessWidget {
                         size: 18,
                       ),
                       SizedBox(width: 7),
-                      Text(cookTime,),
+                      Text(cookTime,style: TextStyle(color: Colors.white),),
                     ],
                   ),
                 )

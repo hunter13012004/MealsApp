@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
+import 'package:mealsapp/pages/loginpage.dart';
 import 'package:mealsapp/utils/customdivider.dart';
 import 'package:mealsapp/utils/customtexfeild.dart';
 
@@ -19,40 +21,55 @@ class _ForgotPageState extends State<ForgotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundcolor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            // welcome text
-            SizedBox(
-              height: 100,
-            ),
-            Text(
-              "Forgotton Your Password",
-              style: GoogleFonts.lato(
-                  textStyle:
-                      TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: textcolor)),
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          primarycolor.withOpacity(0.4),
+          secondarycolor.withOpacity(0.2)
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          // welcome text
 
-            //subtitle
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Lets US Help You Get Back Into Your Account ",
-              style: GoogleFonts.lato(
-                  textStyle:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.normal,color: textcolor)),
-            ),
+          Center(
+              child: Image.asset(
+            'assets/images/logo.png',
+            height: 200,
+          )),
+          SizedBox(
+            height: 10,
+          ),
 
-            //first textfeild(email)
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
+          Text(
+            "Forgotton Your Password",
+            style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: textcolor)),
+          ),
+
+          //subtitle
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Lets US Help You Get Back Into Your Account ",
+            style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                    color: textcolor)),
+          ),
+
+          //first textfeild(email)
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 5000,
                   decoration: BoxDecoration(
@@ -75,38 +92,48 @@ class _ForgotPageState extends State<ForgotPage> {
                         SizedBox(
                           height: 10,
                         ),
-            
-                       
-    
+
                         SizedBox(
                           height: 20,
                         ),
                         custombutton(text: 'RESET', onPressed: resetpassword),
-                //new USer ?
+                        //new USer ?
                         SizedBox(
-                          height: 330,
+                          height: 250,
                         ),
 
                         customdivider(dividertext: 'OR'),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
 
-                        Text("Go Back To Login", style: GoogleFonts.lato(
-                  textStyle:
-                      TextStyle(fontSize: 26, fontWeight: FontWeight.bold,color: textcolor)))
-                      
-                       
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          },
+                          child: Text("Go Back To Login",
+                              style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold,
+                                      color: textcolor))),
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-          ]),
-        ),
+          ),
+        ]),
       ),
     );
   }
-  void resetpassword(){
-   FirebaseAuth.instance.sendPasswordResetEmail(email: emailcontroller.text);
+
+  void resetpassword() {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: emailcontroller.text);
   }
 }

@@ -2,15 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
+import 'package:mealsapp/model/localdatamodel.dart';
 import 'package:mealsapp/pages/cartpage.dart';
 import 'package:mealsapp/pages/loginpage.dart';
 import 'package:mealsapp/pages/restaurantpage.dart';
 import 'package:mealsapp/utils/customdivider.dart';
 import 'package:mealsapp/utils/customdrawer.dart';
 import 'package:mealsapp/utils/customexploretile.dart';
-import 'package:mealsapp/utils/recipecard.dart';
-import 'package:mealsapp/model/recipe.dart';
-import 'package:mealsapp/model/recipeApi.dart';
 import 'package:mealsapp/utils/restrocard.dart';
 
 class Homepage extends StatefulWidget {
@@ -21,22 +19,23 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
- List<recipe> _recipes = [];
-  bool isloading = true;
+  // List<Recipe> _recipes = [];
+  // bool isloading = true;
 
-  @override
-  void initState() {
-    _getRecipes();
-    super.initState();
-  }
 
-  Future<void> _getRecipes() async {
-    _recipes = await recipeApi.getrecipe();
-    setState(() {
-      isloading = false;
-    });
-    print(_recipes);
-  }
+  // @override
+  // void initState() {
+  //   _getRecipes();
+  //   super.initState();
+  // }
+
+  // Future<void> _getRecipes() async {
+  //   _recipes = await recipeApi.getrecipe();
+  //   setState(() {
+  //     isloading = false;
+  //   });
+  //   print(_recipes);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -209,42 +208,22 @@ class _HomepageState extends State<Homepage> {
                 ),
                 // whats on your mind tab
                 customdivider(dividertext: 'WHAT\S ON YOUR MIND'),
+              ListView.builder(
+                    itemCount: recipedata.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return restrocard(
 
-                isloading
-                    ? Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                      itemCount: _recipes.length,
-                        itemBuilder: (context, index) {
-                          return RecipeCard(
-                              title: _recipes[index].name,
-                              cookTime: _recipes[index].totaltime,
-                              rating: _recipes[index].rating.toString(),
-                              thumbnailUrl: _recipes[index].thumbnail);
-                        },
-                      ),
+                          image: recipedata[index].image,
+                          restroname: recipedata[index].name,
+                          subtitle: recipedata[index].name,
+                          time: recipedata[index].time,
+                          rating: recipedata[index].rating.toString(),
+                          ontap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>restroPage( restromodel: recipedata[index],)));});
+                    })
 
-                restrocard(
-                  image: 'assets/images/springroll.jpg',
-                  rating: '4.5',
-                  restroname: 'La Kababiyaa',
-                  subtitle: 'North Indian',
-                  time: '30 min',
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => restroPage()));
-                  },
-                ),
-                restrocard(
-                  image: 'assets/images/vegnoodle.jpg',
-                  rating: '4.0',
-                  restroname: 'Ching Chinese',
-                  subtitle: 'Chinese',
-                  time: '20 min',
-                  ontap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => restroPage()));
-                  },
-                ),
+                
               ],
             ),
           ),
@@ -259,3 +238,39 @@ class _HomepageState extends State<Homepage> {
         context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 }
+
+  // restrocard(
+  //                 image: 'assets/images/springroll.jpg',
+  //                 rating: '4.5',
+  //                 restroname: 'La Kababiyaa',
+  //                 subtitle: 'North Indian',
+  //                 time: '30 min',
+  //                 ontap: () {
+  //                   Navigator.push(context,
+  //                       MaterialPageRoute(builder: (context) => restroPage()));
+  //                 },
+  //               ),
+  //               restrocard(
+  //                 image: 'assets/images/vegnoodle.jpg',
+  //                 rating: '4.0',
+  //                 restroname: 'Ching Chinese',
+  //                 subtitle: 'Chinese',
+  //                 time: '20 min',
+  //                 ontap: () {
+  //                   Navigator.push(context,
+  //                       MaterialPageRoute(builder: (context) => restroPage()));
+  //                 },
+  //               ),
+  // ListView.builder(
+  //                   itemCount: restros.length,
+  //                   shrinkWrap: true,
+  //                   physics: NeverScrollableScrollPhysics(),
+  //                   itemBuilder: (context, index) {
+  //                     return restrocard(
+  //                         image: restros[index].image,
+  //                         restroname: restros[index].name,
+  //                         subtitle: restros[index].subtitle,
+  //                         time: restros[index].time,
+  //                         rating: restros[index].rating.toString(),
+  //                         ontap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>restroPage()));});
+  //                   })
