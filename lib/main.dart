@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mealsapp/firebase_options.dart';
-import 'package:mealsapp/pages/homepage.dart';
-import 'package:mealsapp/pages/loginpage.dart';
 import 'package:mealsapp/pages/splashscreen.dart';
 
 void main()async{

@@ -87,7 +87,7 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
                   _pageController.jumpToPage(2);
                 }, child: Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Text('Skip',style: TextStyle(color: textcolor,fontSize: 20),),
+                  child: Text('Skip',style: TextStyle(color: textcolor,fontSize: 2),),
                 )),
               )
       ]),

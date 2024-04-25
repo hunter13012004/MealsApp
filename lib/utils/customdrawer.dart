@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/pages/cartpage.dart';
+import 'package:mealsapp/pages/favouritrestro.dart';
 
 class CustomDrawer extends StatelessWidget {
   final Function()? onPressed;
@@ -56,7 +57,7 @@ class CustomDrawer extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.favorite,color: primarycolor,),
-                TextButton(onPressed: (){}, child: Text('FAVOURITE',style: TextStyle(color: textcolor))),
+                TextButton(onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context)=>favoriteRestro()));}, child: Text('FAVOURITE',style: TextStyle(color: textcolor))),
               ],
             ),
             // Cart Button

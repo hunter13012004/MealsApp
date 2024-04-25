@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/model/localdatamodel.dart';
 import 'package:mealsapp/pages/cartpage.dart';
+import 'package:mealsapp/pages/favouritrestro.dart';
 import 'package:mealsapp/pages/loginpage.dart';
 import 'package:mealsapp/pages/restaurantpage.dart';
 import 'package:mealsapp/utils/customdivider.dart';
@@ -151,7 +152,7 @@ class _HomepageState extends State<Homepage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>Homepage()));},
                         child: Text(
                           'Recommended',
                           style: GoogleFonts.lato(
@@ -159,7 +160,7 @@ class _HomepageState extends State<Homepage> {
                         ),
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>favoriteRestro()));},
                           child: Row(
                             children: [
                               Icon(

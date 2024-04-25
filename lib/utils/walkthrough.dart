@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
-import 'package:mealsapp/model/localdatamodel.dart';
 class WalkthroughPage extends StatelessWidget {
   final String title;
   final String description;
