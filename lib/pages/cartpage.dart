@@ -12,6 +12,7 @@ class CartsPage extends StatefulWidget {
 }
 
 class _CartsPageState extends State<CartsPage> {
+  List cartitems = [];
  int counter = 0 ;
   @override
   Widget build(BuildContext context) {

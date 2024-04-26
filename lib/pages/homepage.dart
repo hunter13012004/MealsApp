@@ -2,13 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
-import 'package:mealsapp/model/localdatamodel.dart';
 import 'package:mealsapp/model/recipe.dart';
 import 'package:mealsapp/model/recipeApi.dart';
 import 'package:mealsapp/pages/cartpage.dart';
 import 'package:mealsapp/pages/favouritrestro.dart';
 import 'package:mealsapp/pages/loginpage.dart';
-import 'package:mealsapp/pages/restaurantpage.dart';
+import 'package:mealsapp/pages/fooddetailpage.dart';
 import 'package:mealsapp/utils/customdivider.dart';
 import 'package:mealsapp/utils/customdrawer.dart';
 import 'package:mealsapp/utils/customexploretile.dart';
@@ -223,7 +222,10 @@ class _HomepageState extends State<Homepage> {
                           subtitle: _recipes[index].name,
                           time: _recipes[index].totaltime,
                           rating: _recipes[index].rating.toString(),
-                          ontap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>restroPage( restromodel: recipedata[index],)));});
+                          ontap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailsPage(recipes: _recipes[index],
+                          ),
+                          ),
+                          );});
                     })
 
                 

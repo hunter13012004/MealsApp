@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class restrocard extends StatelessWidget {
   final String image;
