@@ -51,7 +51,7 @@ class _signuserupState extends State<signuserup> {
             ),
             Center(
                 child: Image.asset(
-              'assets/images/logo.png',
+              'assets/images/logo.png',color: primarycolor,
               height: 200,
             )),
             const SizedBox(

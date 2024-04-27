@@ -7,12 +7,12 @@ const primarycolor = Color.fromARGB(255, 19, 92, 102);
 const secondarycolor = Color.fromARGB(255, 119, 176, 170);
 
 // pink color theme
-// const textcolor =Color.fromARGB(255, 255, 102, 102);
-// const backgroundcolor = Color.fromARGB(255, 255, 234, 221);
-// const primarycolor = Color.fromARGB(255, 255, 137, 137);
-// const secondarycolor = Color.fromARGB(255, 252, 174, 174);
+// const textcolor =Color.fromARGB(255, 76, 82, 112);
+// const backgroundcolor =Color.fromARGB(255, 188, 236, 224);
+// const primarycolor = Color.fromARGB(255, 246, 82, 161);
+// const secondarycolor =  Color.fromARGB(144, 54, 238, 223);
 
-// const textcolor = Color.fromARGB(255, 52, 131, 9);
-// const backgroundcolor = Color.fromARGB(255, 223, 188, 178);
-// const primarycolor = Color.fromARGB(255, 228, 135, 22);
-// const secondarycolor = Color.fromARGB(255, 250, 171, 1);
+// const textcolor = Color.fromARGB(255, 26, 77, 46);
+// const backgroundcolor = Color.fromARGB(255, 245, 239, 230);
+// const primarycolor = Color.fromARGB(255, 79, 111, 82);
+// const secondarycolor = Color.fromARGB(255, 232, 223, 202);

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/pages/loginpage.dart';
@@ -36,7 +35,7 @@ class _ForgotPageState extends State<ForgotPage> {
         
             Center(
                 child: Image.asset(
-              'assets/images/logo.png',
+              'assets/images/logo.png',color: primarycolor,
               height: 200,
             )),
             const SizedBox(
