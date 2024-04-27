@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
+import 'package:mealsapp/functions/databaseFunctions.dart';
 import 'package:mealsapp/pages/homepage.dart';
 import 'package:mealsapp/utils/custombutton.dart';
 import 'package:mealsapp/utils/customdivider.dart';
@@ -20,8 +21,8 @@ class signuserup extends StatefulWidget {
 class _signuserupState extends State<signuserup> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
-  final TextEditingController confirmpasswordcontroller =
-      TextEditingController();
+  final TextEditingController usernamecontroller = TextEditingController();
+  final TextEditingController confirmpasswordcontroller = TextEditingController();
 
   final _signupFormKey = GlobalKey<FormState>();
 
@@ -44,20 +45,22 @@ class _signuserupState extends State<signuserup> {
             primarycolor.withOpacity(0.4),
             secondarycolor.withOpacity(0.2)
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             // welcome text
             const SizedBox(
               height: 5,
             ),
             Center(
                 child: Image.asset(
-              'assets/images/logo.png',color: primarycolor,
+              'assets/images/logo.png',
+              color: primarycolor,
               height: 200,
             )),
             const SizedBox(
               height: 10,
             ),
-        
+
             Text(
               "New Here ? ",
               style: GoogleFonts.lato(
@@ -66,7 +69,7 @@ class _signuserupState extends State<signuserup> {
                       fontWeight: FontWeight.bold,
                       color: textcolor)),
             ),
-        
+
             //subtitle
             const SizedBox(
               height: 5,
@@ -79,7 +82,7 @@ class _signuserupState extends State<signuserup> {
                       fontWeight: FontWeight.normal,
                       color: textcolor)),
             ),
-        
+
             //first textfeild(email)
             const SizedBox(
               height: 20,
@@ -102,27 +105,42 @@ class _signuserupState extends State<signuserup> {
                           const SizedBox(
                             height: 20,
                           ),
+
+                          customTextfeild(
+                            onSaved: (value){
+                              usernamecontroller.text =value.toString();
+
+                            },
+                            validator: (value){
+                              if(value.toString().isEmpty){
+                                return 'Enter your Name ';
+                              }
+                              else{
+                                return null; 
+                              }
+                            },
+                            key: ValueKey(usernamecontroller),
+                              hinttext: 'Enter your Username',
+                              controller: usernamecontroller,
+                              obscuretext: false),
+                              const SizedBox(
+                            height: 10,
+                          ),
                           customTextfeild(
                             onSaved: (value) {
                               emailcontroller.text = value.toString();
-                              
                             },
+                            
                             validator: (value) {
-                              if(value.toString().isEmpty){
-                                return  'Email should not be empty';
-                              }else if(
-                                !value.toString().contains('@')){
+                              if (value.toString().isEmpty) {
+                                return 'Email should not be empty';
+                              } else if (!value.toString().contains('@')) {
                                 return 'Enter a valid email';
-
-                              }
-                              else{
+                              } else {
                                 return null;
                               }
-                              
                             },
                             key: ValueKey(emailcontroller),
-                            
-                            
                             hinttext: 'Enter Your Email ',
                             controller: emailcontroller,
                             obscuretext: false,
@@ -132,21 +150,17 @@ class _signuserupState extends State<signuserup> {
                             height: 10,
                           ),
                           customTextfeild(
-                             onSaved: (value) {
+                            onSaved: (value) {
                               passwordcontroller.text = value.toString();
-                              
                             },
                             validator: (value) {
-                              if(value.toString().length <=5 ){
-                                return  'password lenght should be 6 or more ';
+                              if (value.toString().length <= 5) {
+                                return 'password lenght should be 6 or more ';
+                              } else {
+                                return null;
                               }
-                              else {
-                                return null ;
-                              }
-                              
                             },
                             key: ValueKey(passwordcontroller),
-                            
                             hinttext: 'Password',
                             controller: passwordcontroller,
                             obscuretext: true,
@@ -155,26 +169,22 @@ class _signuserupState extends State<signuserup> {
                             height: 10,
                           ),
                           customTextfeild(
-                              onSaved: (value) {
+                            onSaved: (value) {
                               confirmpasswordcontroller.text = value.toString();
-                              
                             },
                             validator: (value) {
-                              if(value.toString() != passwordcontroller.text ){
-                                return  'passwords Do not match ';
+                              if (value.toString() != passwordcontroller.text) {
+                                return 'passwords Do not match ';
+                              } else {
+                                return null;
                               }
-                              else {
-                                return null ;
-                              }
-                              
                             },
                             key: ValueKey(confirmpasswordcontroller),
-
                             hinttext: 'Confirm Password',
                             controller: confirmpasswordcontroller,
                             obscuretext: true,
                           )
-        
+
                           //login button
                           ,
                           const SizedBox(
@@ -234,10 +244,12 @@ class _signuserupState extends State<signuserup> {
       ),
     );
   }
-    trysubmit() {
+
+  trysubmit() {
     final isvalid = _signupFormKey.currentState!.validate();
     if (isvalid) {
       signup();
+      create('Users', usernamecontroller.text, usernamecontroller.text, emailcontroller.text, '');
     } else {
       print('something wrong');
     }

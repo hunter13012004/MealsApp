@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mealsapp/auth/auth.dart';
 import 'package:mealsapp/firebase_options.dart';
 import 'package:mealsapp/provider/cartproivider.dart';
+import 'package:mealsapp/provider/controllerprovider.dart';
 import 'package:mealsapp/provider/imageprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => imageProvider(),),
-        ChangeNotifierProvider(create: (context)=> shopProvider())
+        ChangeNotifierProvider(create: (context)=> shopProvider()),
+        ChangeNotifierProvider(create: (context)=> controllerProvider())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

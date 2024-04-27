@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
+import 'package:mealsapp/functions/databaseFunctions.dart';
 import 'package:mealsapp/model/recipe.dart';
 import 'package:mealsapp/model/recipeApi.dart';
 import 'package:mealsapp/pages/cartpage.dart';
@@ -114,7 +115,7 @@ class _HomepageState extends State<Homepage> {
                         backgroundColor: Colors.black,
                         backgroundImage: profilepicprovider.image != null
                             ? FileImage(File(profilepicprovider.image!.path))
-                            : AssetImage('assets/images/myimage.jpg')
+                            : AssetImage('assets/images/man.png')
                                 as ImageProvider<Object>,
                       ),
                     ],
