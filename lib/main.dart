@@ -1,8 +1,8 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mealsapp/auth/auth.dart';
 import 'package:mealsapp/firebase_options.dart';
+import 'package:mealsapp/provider/cartproivider.dart';
 import 'package:mealsapp/provider/imageprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
-    MyApp(),
+    const MyApp(),
   );
 }
 
@@ -20,8 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => imageProvider())],
-      child: MaterialApp(
+      providers: [
+        ChangeNotifierProvider(create: (context) => imageProvider(),),
+        ChangeNotifierProvider(create: (context)=> shopProvider())
+      ],
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: AuthPage(),
       ),

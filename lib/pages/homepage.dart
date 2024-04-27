@@ -7,14 +7,13 @@ import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/model/recipe.dart';
 import 'package:mealsapp/model/recipeApi.dart';
 import 'package:mealsapp/pages/cartpage.dart';
-import 'package:mealsapp/pages/favouritrestro.dart';
 import 'package:mealsapp/pages/loginpage.dart';
 import 'package:mealsapp/pages/fooddetailpage.dart';
 import 'package:mealsapp/provider/imageprovider.dart';
 import 'package:mealsapp/utils/customdivider.dart';
 import 'package:mealsapp/utils/customdrawer.dart';
 import 'package:mealsapp/utils/customexploretile.dart';
-import 'package:mealsapp/utils/restrocard.dart';
+import 'package:mealsapp/utils/recipecard.dart';
 import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
@@ -25,8 +24,9 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
- List<Recipe> _recipes = [];
+  List<Recipe> _recipes = [];
   bool isloading = true;
+  bool Isfavorurite = false ;
 
   @override
   void initState() {
@@ -52,8 +52,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<imageProvider>(
-      builder: (context, profilepicprovider, child) => 
-      Scaffold(
+      builder: (context, profilepicprovider, child) => Scaffold(
         backgroundColor: backgroundcolor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -76,12 +75,12 @@ class _HomepageState extends State<Homepage> {
             ),
           ],
         ),
-      
+
         // drawer==>
         drawer: CustomDrawer(
           onPressed: loguserout,
         ),
-      // body start here==>
+        // body start here==>
         body: DefaultTabController(
           length: 4,
           child: Padding(
@@ -113,9 +112,10 @@ class _HomepageState extends State<Homepage> {
                       ),
                       CircleAvatar(
                         backgroundColor: Colors.black,
-                        backgroundImage:profilepicprovider.image != null
-            ? FileImage(File(profilepicprovider.image!.path))
-            : AssetImage('assets/images/myimage.jpg') as ImageProvider<Object>,
+                        backgroundImage: profilepicprovider.image != null
+                            ? FileImage(File(profilepicprovider.image!.path))
+                            : AssetImage('assets/images/myimage.jpg')
+                                as ImageProvider<Object>,
                       ),
                     ],
                   ),
@@ -152,59 +152,51 @@ class _HomepageState extends State<Homepage> {
                   SizedBox(
                     height: 15,
                   ),
-      
+
                   // For You Offer Tabs
                   customdivider(dividertext: 'FOR YOU'),
                   SizedBox(
                     height: 15,
                   ),
-      
+
                   // still need work  recommended and favorite tabs
                   Container(
-                    decoration:
-                        BoxDecoration(border: Border.all(color: primarycolor)),
+                    width: 120,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: secondarycolor),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Homepage()));
-                          },
-                          child: Text(
-                            'Recommended',
-                            style: GoogleFonts.lato(
-                                textStyle: TextStyle(color: textcolor)),
-                          ),
-                        ),
-                        TextButton(
+                        IconButton(
                             onPressed: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => favoriteRestro()));
+                                      builder: (context) => Homepage()));
                             },
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.favorite,
-                                  color: primarycolor,
-                                ),
-                                Text(
-                                  'Favourite',
-                                  style: TextStyle(color: textcolor),
-                                )
-                              ],
+                            icon: Icon(
+                              Icons.recommend,
+                              color: textcolor,
+                            )),
+                        Container(
+                            height: 50,
+                            child: VerticalDivider(
+                              thickness: 2,
+                            )),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.favorite,
+                              color: textcolor,
                             ))
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-      
+
                   // Foryoutile(OfferText: 'KFC', subtitle: '',),
                   SizedBox(
                     height: 15,
@@ -214,7 +206,7 @@ class _HomepageState extends State<Homepage> {
                   SizedBox(
                     height: 15,
                   ),
-      
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -235,28 +227,21 @@ class _HomepageState extends State<Homepage> {
                   // whats on your mind tab
                   customdivider(dividertext: 'WHAT\S ON YOUR MIND'),
                   isloading
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : ListView.builder(
-                          itemCount: _recipes.length,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return restrocard(
-      
-                            image: _recipes[index].thumbnail,
-                            restroname: _recipes[index].name,
-                            subtitle: _recipes[index].name,
-                            time: _recipes[index].totaltime,
-                            rating: _recipes[index].rating.toString(),
-                            ontap: () {Navigator.push(context,MaterialPageRoute(builder: (context)=>DetailsPage(recipes: _recipes[index],
-                            ),
-                            ),
-                            );});
-                      })
-      
-                  
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      itemCount: _recipes.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return RecipeCard(title: _recipes[index].name, cookTime: _recipes[index].totaltime,
+                         rating: _recipes[index].rating.toString(), thumbnailUrl: _recipes[index].thumbnail,
+                        onlike: addtolike,
+                        icon: Isfavorurite ? Icon(Icons.favorite_border_outlined,) : Icon(Icons.favorite,color: Colors.red,),
+                         ontap: (){Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailsPage(recipes: _recipes[index])));},
+                         );
+                  })
                 ],
               ),
             ),
@@ -264,6 +249,14 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
     );
+  }
+
+  void addtolike(){
+
+    setState(() {
+      Isfavorurite = !Isfavorurite;
+     
+    });
   }
 
   void loguserout() {

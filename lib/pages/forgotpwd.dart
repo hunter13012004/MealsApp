@@ -35,39 +35,39 @@ class _ForgotPageState extends State<ForgotPage> {
             'assets/images/logo.png',
             height: 200,
           )),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
 
           Text(
             "Forgotton Your Password",
             style: GoogleFonts.lato(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: textcolor)),
           ),
 
           //subtitle
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
             "Lets US Help You Get Back Into Your Account ",
             style: GoogleFonts.lato(
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
                     color: textcolor)),
           ),
 
           //first textfeild(email)
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
             child: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -80,7 +80,7 @@ class _ForgotPageState extends State<ForgotPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         customTextfeild(
@@ -89,21 +89,21 @@ class _ForgotPageState extends State<ForgotPage> {
                           obscuretext: false,
                         ),
                         //second textfeild(password)
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
 
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         custombutton(text: 'RESET', onPressed: resetpassword),
                         //new USer ?
-                        SizedBox(
+                        const SizedBox(
                           height: 250,
                         ),
 
-                        customdivider(dividertext: 'OR'),
-                        SizedBox(
+                        const customdivider(dividertext: 'OR'),
+                        const SizedBox(
                           height: 20,
                         ),
 
@@ -112,11 +112,11 @@ class _ForgotPageState extends State<ForgotPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) => const LoginPage()));
                           },
                           child: Text("Go Back To Login",
                               style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       fontSize: 26,
                                       fontWeight: FontWeight.bold,
                                       color: textcolor))),

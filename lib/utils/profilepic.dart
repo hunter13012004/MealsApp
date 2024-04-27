@@ -21,7 +21,7 @@ class _ProfilePicState extends State<ProfilePic> {
       builder: (context, ProfilpicProvider, child) => CircleAvatar(
         backgroundImage: ProfilpicProvider.image != null
             ? FileImage(File(ProfilpicProvider.image!.path))
-            : AssetImage('assets/images/myimage.jpg') as ImageProvider<Object>,
+            : const AssetImage('assets/images/myimage.jpg') as ImageProvider<Object>,
         radius: 70,
         child: Align(
             alignment: Alignment.bottomRight,
@@ -36,7 +36,7 @@ class _ProfilePicState extends State<ProfilePic> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                                content: Container(
+                                content: SizedBox(
                               height: 200,
                               child: Column(
                                 mainAxisAlignment:
@@ -48,21 +48,21 @@ class _ProfilePicState extends State<ProfilePic> {
                                         ProfilpicProvider.pickImage(ImageSource.gallery);
                                         Navigator.pop(context);
                                       },
-                                      icon: Icon(Icons.browse_gallery),
-                                      label: Text('Upload from gallery')),
+                                      icon: const Icon(Icons.browse_gallery),
+                                      label: const Text('Upload from gallery')),
                                   ElevatedButton.icon(
                                       onPressed: () {
                                        ProfilpicProvider.pickImage(ImageSource.camera);
                                         Navigator.pop(context);
                                       },
-                                      icon: Icon(Icons.camera),
-                                      label: Text('Click from camera')),
+                                      icon: const Icon(Icons.camera),
+                                      label: const Text('Click from camera')),
                                   ElevatedButton.icon(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      icon: Icon(Icons.cancel),
-                                      label: Text('cancel'))
+                                      icon: const Icon(Icons.cancel),
+                                      label: const Text('cancel'))
                                 ],
                               ),
                             ));

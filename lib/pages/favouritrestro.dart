@@ -10,6 +10,6 @@ class favoriteRestro extends StatefulWidget {
 class _favoriteRestroState extends State<favoriteRestro> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

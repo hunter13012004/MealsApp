@@ -39,33 +39,33 @@ class _LoginPageState extends State<LoginPage> {
                     // welcome text
                     
                     Center(child: Image.asset('assets/images/logo.png',height: 200,)),
-                    SizedBox(
+                    const SizedBox(
         height: 10,
                     ),
                     Text(
         "Welcome Back ",
         style: GoogleFonts.lato(
             textStyle:
-                TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: textcolor)),
+                const TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: textcolor)),
                     ),
         
                     //subtitle
-                    SizedBox(
+                    const SizedBox(
         height: 5,
                     ),
                     Text(
         "You Have Been Missed! ",
         style: GoogleFonts.lato(
             textStyle:
-                TextStyle(fontSize: 20, fontWeight: FontWeight.normal,color: textcolor)),
+                const TextStyle(fontSize: 20, fontWeight: FontWeight.normal,color: textcolor)),
                     ),
         
                     //first textfeild(email)
-                    SizedBox(
+                    const SizedBox(
         height: 20,
                     ),
                     Expanded(
-        child: SingleChildScrollView(physics: NeverScrollableScrollPhysics(),
+        child: SingleChildScrollView(physics: const NeverScrollableScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     customTextfeild(
@@ -87,14 +87,14 @@ class _LoginPageState extends State<LoginPage> {
                       obscuretext: false,
                     ),
                     //second textfeild(password)
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     customTextfeild(
                         hinttext: 'Password', controller: passwordcontroller,obscuretext: true,),
             
                     // fdorgotpassword text?
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Row(
@@ -102,9 +102,9 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            Navigator.push(context,MaterialPageRoute(builder: (context)=> ForgotPage()));
+                            Navigator.push(context,MaterialPageRoute(builder: (context)=> const ForgotPage()));
                           },
-                          child: Text(
+                          child: const Text(
                             'Forgot password?',
                             style: TextStyle(color:textcolor),
                           ),
@@ -113,23 +113,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     //login button
             
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     custombutton(text: 'Login', onPressed: signuserin),
             //new USer ?
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('New User?',style: TextStyle(color: primarycolor),),
+                        const Text('New User?',style: TextStyle(color: primarycolor),),
                         GestureDetector(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>signuserup()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const signuserup()));
                           },
-                          child: Text(
+                          child: const Text(
                             'SignUp',
                             style: TextStyle(color: textcolor),
                           ),
@@ -137,15 +137,15 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     //or login with
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                    customdivider(dividertext: 'OR'),
+                    const customdivider(dividertext: 'OR'),
                     //apple and google logo
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         customcontainer(
@@ -171,6 +171,6 @@ class _LoginPageState extends State<LoginPage> {
   await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailcontroller.text, password: passwordcontroller.text);
     Navigator.push(
-        context, MaterialPageRoute(builder: ((context) => Homepage())));
+        context, MaterialPageRoute(builder: ((context) => const Homepage())));
   }
 }

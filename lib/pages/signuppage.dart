@@ -39,11 +39,11 @@ class _signuserupState extends State<signuserup> {
                   ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     // welcome text
-                    SizedBox(
+                    const SizedBox(
         height: 5,
                     ),
                     Center(child: Image.asset('assets/images/logo.png',height: 200,)),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
            
@@ -51,27 +51,27 @@ class _signuserupState extends State<signuserup> {
         "New Here ",
         style: GoogleFonts.lato(
             textStyle:
-                TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: textcolor)),
+                const TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: textcolor)),
                     ),
         
                     //subtitle
-                    SizedBox(
+                    const SizedBox(
         height: 5,
                     ),
                     Text(
         "Lets Get You Signed Up ",
         style: GoogleFonts.lato(
             textStyle:
-                TextStyle(fontSize: 20, fontWeight: FontWeight.normal,color: textcolor)),
+                const TextStyle(fontSize: 20, fontWeight: FontWeight.normal,color: textcolor)),
                     ),
         
                     //first textfeild(email)
-                    SizedBox(
+                    const SizedBox(
         height: 20,
                     ),
                     Expanded(
         child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -84,7 +84,7 @@ class _signuserupState extends State<signuserup> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     customTextfeild(
@@ -93,33 +93,33 @@ class _signuserupState extends State<signuserup> {
                       obscuretext: false,
                     ),
                     //second textfeild(password)
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     customTextfeild(
                         hinttext: 'Password', controller: passwordcontroller,obscuretext: true,),
-                        SizedBox(
+                        const SizedBox(
                       height: 10,
                     ),
                       customTextfeild(hinttext: 'Confirm Password', controller: confirmpasswordcontroller,obscuretext: true,)
             
                     //login button
             ,
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     custombutton(text: 'SignUp', onPressed: signup),
             //new USer ?
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Already a user ?',style: TextStyle(color: primarycolor),),
+                        const Text('Already a user ?',style: TextStyle(color: primarycolor),),
                         GestureDetector(
                           onTap: (){Navigator.pop(context);},
-                          child: Text(
+                          child: const Text(
                             'SignIn',
                             style: TextStyle(color: textcolor),
                           ),
@@ -127,15 +127,15 @@ class _signuserupState extends State<signuserup> {
                       ],
                     ),
                     //or login with
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    customdivider(dividertext: 'OR'),
+                    const customdivider(dividertext: 'OR'),
                     //apple and google logo
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         customcontainer(
@@ -159,7 +159,7 @@ class _signuserupState extends State<signuserup> {
   void signup()async{
    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailcontroller.text,
          password: passwordcontroller.text);
-         Navigator.push(context,MaterialPageRoute(builder: (context)=> Homepage()));
+         Navigator.push(context,MaterialPageRoute(builder: (context)=> const Homepage()));
   }
    
   }

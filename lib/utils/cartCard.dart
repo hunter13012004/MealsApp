@@ -46,37 +46,37 @@ class CartCard extends StatelessWidget {
                 children: [
                   Text(
                     Dishname,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18,
                         color: textcolor,
                         fontWeight: FontWeight.bold),
                   ),
-                  Text('₹'+price,
-                      style: TextStyle(fontSize: 16, color: textcolor))
+                  Text('₹$price',
+                      style: const TextStyle(fontSize: 16, color: textcolor))
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Container(
                   width: 40,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: backgroundcolor),
                   child: IconButton(
-                      onPressed: onPressedminus, icon: Icon(Icons.remove))),
+                      onPressed: onPressedminus, icon: const Icon(Icons.remove))),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   counter,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
               ),
               Container(
                   width: 40,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: backgroundcolor),
                   child: IconButton(
-                      onPressed: onPressedadd, icon: Icon(Icons.add))),
+                      onPressed: onPressedadd, icon: const Icon(Icons.add))),
             ],
           )),
     );

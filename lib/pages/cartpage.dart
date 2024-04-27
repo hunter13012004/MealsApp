@@ -13,14 +13,14 @@ class CartsPage extends StatefulWidget {
 
 class _CartsPageState extends State<CartsPage> {
   List cartitems = [];
- int counter = 0 ;
+ static int counter = 0 ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           'MY CART',
           style: TextStyle(color: textcolor),
         ),
@@ -28,22 +28,9 @@ class _CartsPageState extends State<CartsPage> {
       ),
       body: Column(
         children: [
-          CartCard(
-          counter: counter.toString(),
-          Dishname: ' Veg.Noodles',
-          price: '210',
-          ImagePath: 'assets/images/vegnoodle.jpg',
-          onPressedadd: onAdd,
-          onPressedminus:onMinus ,
-        ),
-        CartCard(
-          counter: counter.toString(),
-          Dishname: ' Veg.Spring Roll',
-          price: '180',
-          ImagePath: 'assets/images/springroll.jpg',
-          onPressedadd: onAdd,
-          onPressedminus:onMinus ,
-        )
+         ListView.builder(itemCount: cartitems.length,itemBuilder: (context,index){
+          return CartCard(Dishname: '', ImagePath: '', price: '', onPressedminus: (){}, onPressedadd:(){}, counter: '');
+         } )
         ],
       ),
     );

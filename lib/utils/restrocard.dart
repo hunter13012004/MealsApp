@@ -27,7 +27,7 @@ class restrocard extends StatelessWidget {
           child: Column(
             children: [
               ClipRRect(
-                  borderRadius: BorderRadiusDirectional.only(
+                  borderRadius: const BorderRadiusDirectional.only(
                       topEnd: Radius.circular(20),
                       topStart: Radius.circular(20)),
                   child: Image.network(
@@ -42,7 +42,7 @@ class restrocard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: secondarycolor,
                   border: Border.all(color: primarycolor),
-                  borderRadius: BorderRadiusDirectional.only(
+                  borderRadius: const BorderRadiusDirectional.only(
                     bottomEnd: Radius.circular(20),
                     bottomStart: Radius.circular(20),
                   ),
@@ -58,7 +58,7 @@ class restrocard extends StatelessWidget {
                           Expanded(
                             child: Text(
                               restroname,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20,
                                   color: textcolor,
                                   fontWeight: FontWeight.bold),
@@ -68,25 +68,25 @@ class restrocard extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: backgroundcolor,
                                 borderRadius: BorderRadius.circular(20)),
+                            height: 20,
+                            width: 50,
                             child: Center(
                                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
                                   rating,
-                                  style: TextStyle(color: textcolor),
+                                  style: const TextStyle(color: textcolor),
                                 ),
-                                Icon(Icons.star_border,color: Colors.yellow,size: 20,)
+                                const Icon(Icons.star_border,color: Colors.yellow,size: 20,)
                               ],
                             )),
-                            height: 20,
-                            width: 50,
                           )
                         ],
                       ),
                       Expanded(
                         child: Text(
                           subtitle,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 14,
                               color: textcolor,
                               fontWeight: FontWeight.normal),
@@ -94,10 +94,10 @@ class restrocard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(Icons.timelapse_rounded),
+                          const Icon(Icons.timelapse_rounded),
                           Text(
                             time,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 12,
                                 color: textcolor,
                                 fontWeight: FontWeight.bold),

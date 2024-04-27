@@ -5,6 +5,8 @@ import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/pages/walkthrough.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -14,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -37,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 200,
               height: 200,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
            
           ],
         ),

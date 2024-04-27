@@ -25,10 +25,10 @@ class MyExploreTile extends StatelessWidget {
             children: [
               Text(
                 OfferText,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(subtitle),
-              Icon(Icons.keyboard_double_arrow_right_rounded)
+              const Icon(Icons.keyboard_double_arrow_right_rounded)
             ],
           ),
         ));

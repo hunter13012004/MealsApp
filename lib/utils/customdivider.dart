@@ -11,20 +11,20 @@ class customdivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Divider(
                       thickness: 1,
                       color: primarycolor,
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       dividertext,
-                      style: GoogleFonts.lato(textStyle: TextStyle(color: textcolor)),
+                      style: GoogleFonts.lato(textStyle: const TextStyle(color: textcolor)),
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Divider(
                       thickness: 1,
                       color: primarycolor,

@@ -19,10 +19,10 @@ class customTextfeild extends StatelessWidget {
           controller: controller,
           obscureText: obscuretext,
           decoration: InputDecoration(
-            hintStyle: TextStyle(color: primarycolor),
+            hintStyle: const TextStyle(color: primarycolor),
             hintText: hinttext,
-             enabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
-             focusedBorder: UnderlineInputBorder(borderSide: BorderSide.none)
+             enabledBorder: const UnderlineInputBorder(borderSide: BorderSide.none),
+             focusedBorder: const UnderlineInputBorder(borderSide: BorderSide.none)
             
           ),
         ),

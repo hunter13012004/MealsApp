@@ -34,17 +34,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
               Container(
                 height: 250,
                 width: double.infinity,
-                decoration: BoxDecoration(color: primarycolor),
+                decoration: const BoxDecoration(color: primarycolor),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    ProfilePic(),
+                    const ProfilePic(),
                    
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       'Harsh Kashyap',
                       style: TextStyle(
                           fontSize: 18,
@@ -52,21 +52,21 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           color: textcolor),
                     ),
                     Text(user.email.toString(),
-                        style: TextStyle(fontSize: 14, color: textcolor))
+                        style: const TextStyle(fontSize: 14, color: textcolor))
                   ],
                 ),
               ),
             ],
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
 
           // home button
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.home,
                 color: primarycolor,
               ),
@@ -74,7 +74,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text(
+                  child: const Text(
                     'HOME',
                     style: TextStyle(color: textcolor),
                   )),
@@ -83,7 +83,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           // Favourite Button
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.favorite,
                 color: primarycolor,
               ),
@@ -92,52 +92,52 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => favoriteRestro()));
+                            builder: (context) => const favoriteRestro()));
                   },
-                  child: Text('FAVOURITE', style: TextStyle(color: textcolor))),
+                  child: const Text('FAVOURITE', style: TextStyle(color: textcolor))),
             ],
           ),
           // Cart Button
 
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.shopping_cart,
                 color: primarycolor,
               ),
               TextButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartsPage()));
+                        MaterialPageRoute(builder: (context) => const CartsPage()));
                   },
-                  child: Text('MY CART', style: TextStyle(color: textcolor))),
+                  child: const Text('MY CART', style: TextStyle(color: textcolor))),
             ],
           ),
 
           //your order
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.shopping_bag,
                 color: primarycolor,
               ),
               TextButton(
                   onPressed: () {},
                   child:
-                      Text('YOUR ORDERS', style: TextStyle(color: textcolor))),
+                      const Text('YOUR ORDERS', style: TextStyle(color: textcolor))),
             ],
           ),
 
           // logout button
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.logout,
                 color: primarycolor,
               ),
               TextButton(
                   onPressed: widget.onPressed,
-                  child: Text('LOGOUT', style: TextStyle(color: textcolor))),
+                  child: const Text('LOGOUT', style: TextStyle(color: textcolor))),
             ],
           ),
         ],

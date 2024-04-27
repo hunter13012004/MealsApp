@@ -5,6 +5,8 @@ import 'package:mealsapp/utils/walkthrough.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class WalkthroughScreen extends StatefulWidget {
+  const WalkthroughScreen({super.key});
+
   @override
   State<WalkthroughScreen> createState() => _WalkthroughScreenState();
 }
@@ -59,7 +61,7 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
               controller: _pageController,
               count: 3,
               effect:
-                  WormEffect(dotColor: primarycolor, activeDotColor: textcolor),
+                  const WormEffect(dotColor: primarycolor, activeDotColor: textcolor),
             ),
           ),
         ),
@@ -73,9 +75,9 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => const LoginPage()));
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_circle_right_outlined,
                         size: 50,
                         color: primarycolor,
@@ -85,8 +87,8 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
                 alignment: Alignment.topRight,
                 child: TextButton(onPressed: () {
                   _pageController.jumpToPage(2);
-                }, child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                }, child: const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: Text('Skip',style: TextStyle(color: textcolor,fontSize: 20),),
                 )),
               )

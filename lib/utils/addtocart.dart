@@ -14,8 +14,8 @@ class AddtoCart extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(color: primarycolor, borderRadius: BorderRadius.circular(20)),
-          child: Center(child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          child: const Center(child: Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text('ADD TO CART',style: TextStyle(fontSize: 30,color: backgroundcolor),),
           )),
         ),

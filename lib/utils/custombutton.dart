@@ -11,7 +11,7 @@ class custombutton extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       decoration: BoxDecoration(color: primarycolor,borderRadius: BorderRadius.circular(12)),
-      child: TextButton(onPressed: onPressed, child: Text(text,style: TextStyle(color:Colors.white,fontSize: 20),)),
+      child: TextButton(onPressed: onPressed, child: Text(text,style: const TextStyle(color:Colors.white,fontSize: 20),)),
     );
   }
 }
