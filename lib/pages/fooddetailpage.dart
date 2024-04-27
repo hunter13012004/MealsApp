@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
-import 'package:mealsapp/model/localdatamodel.dart';
 import 'package:mealsapp/model/recipe.dart';
 import 'package:mealsapp/utils/addtocart.dart';
 
