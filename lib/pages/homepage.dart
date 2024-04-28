@@ -4,13 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
-import 'package:mealsapp/functions/databaseFunctions.dart';
-import 'package:mealsapp/model/recipe.dart';
-import 'package:mealsapp/model/recipeApi.dart';
 import 'package:mealsapp/pages/cartpage.dart';
 import 'package:mealsapp/pages/loginpage.dart';
 import 'package:mealsapp/pages/fooddetailpage.dart';
 import 'package:mealsapp/provider/imageprovider.dart';
+import 'package:mealsapp/services/recipeProvider.dart';
 import 'package:mealsapp/utils/customdivider.dart';
 import 'package:mealsapp/utils/customdrawer.dart';
 import 'package:mealsapp/utils/customexploretile.dart';
@@ -25,30 +23,14 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  List<Recipe> _recipes = [];
-  bool isloading = true;
-  bool Isfavorurite = false ;
-
   @override
   void initState() {
-    _getrecipes();
+    // TODO: implement initState
     super.initState();
-  }
-
-  Future<void> _getrecipes() async {
-    _recipes = await recipeApi.getrecipe();
-    setState(() {
-      isloading = false;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<RecipeProvider>(context, listen: false).getAllRecipes();
     });
   }
-
-  // Future<void> _getRecipes() async {
-  //   _recipes = await recipeApiNew.();
-  //   setState(() {
-  //     isloading = false;
-  //   });
-
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,163 +69,173 @@ class _HomepageState extends State<Homepage> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        size: 40,
-                        color: textcolor,
-                      ),
-                      Text(
-                        'Home',
-                        style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                                color: textcolor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                      ),
-                      Icon(
-                        Icons.arrow_drop_down,
-                        color: primarycolor,
-                      ),
-                      SizedBox(
-                        width: 230,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.black,
-                        backgroundImage: profilepicprovider.image != null
-                            ? FileImage(File(profilepicprovider.image!.path))
-                            : AssetImage('assets/images/man.png')
-                                as ImageProvider<Object>,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  // SearchBars
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: primarycolor),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Row(
+              child: Consumer<RecipeProvider>(
+                builder: (context, value, child) => Column(
+                  children: [
+                    Row(
                       children: [
                         Icon(
-                          Icons.search,
-                          size: 30,
-                          color: secondarycolor,
+                          Icons.location_on,
+                          size: 40,
+                          color: textcolor,
+                        ),
+                        Text(
+                          'Home',
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  color: textcolor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16)),
+                        ),
+                        Icon(
+                          Icons.arrow_drop_down,
+                          color: primarycolor,
                         ),
                         SizedBox(
-                          width: 5,
+                          width: 230,
                         ),
-                        Expanded(
-                            child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'Search',
-                              hintStyle: TextStyle(color: secondarycolor),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide.none)),
-                        )),
+                        CircleAvatar(
+                          backgroundColor: Colors.black,
+                          backgroundImage: profilepicprovider.image != null
+                              ? FileImage(File(profilepicprovider.image!.path))
+                              : AssetImage('assets/images/man.png')
+                                  as ImageProvider<Object>,
+                        ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    // SearchBars
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: primarycolor),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Row(
+                        children: [
+                          Icon(
+                            Icons.search,
+                            size: 30,
+                            color: secondarycolor,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Expanded(
+                              child: TextField(
+                            decoration: InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: TextStyle(color: secondarycolor),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide.none)),
+                          )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
 
-                  // For You Offer Tabs
-                  customdivider(dividertext: 'FOR YOU'),
-                  SizedBox(
-                    height: 15,
-                  ),
+                    // For You Offer Tabs
+                    customdivider(dividertext: 'FOR YOU'),
+                    SizedBox(
+                      height: 15,
+                    ),
 
-                  // still need work  recommended and favorite tabs
-                  Container(
-                    width: 120,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: secondarycolor),
-                    child: Row(
+                    // still need work  recommended and favorite tabs
+                    Container(
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: secondarycolor),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Homepage()));
+                              },
+                              icon: Icon(
+                                Icons.recommend,
+                                color: textcolor,
+                              )),
+                          Container(
+                              height: 50,
+                              child: VerticalDivider(
+                                thickness: 2,
+                              )),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.favorite,
+                                color: textcolor,
+                              ))
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    // Foryoutile(OfferText: 'KFC', subtitle: '',),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    // explore tabs
+                    customdivider(dividertext: 'EXPLORE'),
+                    SizedBox(
+                      height: 15,
+                    ),
+
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        IconButton(
-                            onPressed: () {
+                        MyExploreTile(
+                          OfferText: 'Offers 50% off',
+                          subtitle: 'Flat Discounts',
+                          image: '',
+                        ),
+                        MyExploreTile(
+                            OfferText: 'Play & Win',
+                            subtitle: 'Exiting Prizes',
+                            image: '')
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    // whats on your mind tab
+                    customdivider(dividertext: 'WHAT\S ON YOUR MIND'),
+                    ListView.builder(
+                        itemCount: value.recipes.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return RecipeCard(
+                            title: value.recipes[index].title,
+                            cookTime: value.recipes[index].cookTime.toString(),
+                            rating: value.recipes[index].cuisine,
+                            thumbnailUrl: value.recipes[index].photoUrl,
+                            onlike: () {},
+                            icon: Icon(
+                              Icons.favorite_border_outlined,
+                            ),
+                            ontap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Homepage()));
+                                      builder: (context) => DetailsPage(
+                                            recipes: value.recipes[index],
+                                          )));
                             },
-                            icon: Icon(
-                              Icons.recommend,
-                              color: textcolor,
-                            )),
-                        Container(
-                            height: 50,
-                            child: VerticalDivider(
-                              thickness: 2,
-                            )),
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.favorite,
-                              color: textcolor,
-                            ))
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  // Foryoutile(OfferText: 'KFC', subtitle: '',),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  // explore tabs
-                  customdivider(dividertext: 'EXPLORE'),
-                  SizedBox(
-                    height: 15,
-                  ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      MyExploreTile(
-                        OfferText: 'Offers 50% off',
-                        subtitle: 'Flat Discounts',
-                        image: '',
-                      ),
-                      MyExploreTile(
-                          OfferText: 'Play & Win',
-                          subtitle: 'Exiting Prizes',
-                          image: '')
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  // whats on your mind tab
-                  customdivider(dividertext: 'WHAT\S ON YOUR MIND'),
-                  isloading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : ListView.builder(
-                      itemCount: _recipes.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return RecipeCard(title: _recipes[index].name, cookTime: _recipes[index].totaltime,
-                         rating: _recipes[index].rating.toString(), thumbnailUrl: _recipes[index].thumbnail,
-                        onlike: addtolike,
-                        icon: Isfavorurite ? Icon(Icons.favorite_border_outlined,) : Icon(Icons.favorite,color: Colors.red,),
-                         ontap: (){Navigator.push(context,MaterialPageRoute(builder: (context)=> DetailsPage(recipes: _recipes[index])));},
-                         );
-                  })
-                ],
+                          );
+                        })
+                  ],
+                ),
               ),
             ),
           ),
@@ -252,13 +244,13 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  void addtolike(){
+  // void addtolike(){
 
-    setState(() {
-      Isfavorurite = !Isfavorurite;
-     
-    });
-  }
+  //   setState(() {
+  //     Isfavorurite = !Isfavorurite;
+
+  //   });
+  // }
 
   void loguserout() {
     FirebaseAuth.instance.signOut();

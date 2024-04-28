@@ -5,6 +5,7 @@ import 'package:mealsapp/firebase_options.dart';
 import 'package:mealsapp/provider/cartproivider.dart';
 import 'package:mealsapp/provider/controllerprovider.dart';
 import 'package:mealsapp/provider/imageprovider.dart';
+import 'package:mealsapp/services/recipeProvider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => imageProvider(),),
         ChangeNotifierProvider(create: (context)=> shopProvider()),
-        ChangeNotifierProvider(create: (context)=> controllerProvider())
+        ChangeNotifierProvider(create: (context)=> controllerProvider()),
+        ChangeNotifierProvider(create: (context)=> RecipeProvider())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
