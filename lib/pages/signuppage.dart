@@ -249,7 +249,7 @@ class _signuserupState extends State<signuserup> {
     final isvalid = _signupFormKey.currentState!.validate();
     if (isvalid) {
       signup();
-      create('Users', usernamecontroller.text, usernamecontroller.text, emailcontroller.text, '');
+      create('Users', usernamecontroller.text, usernamecontroller.text, emailcontroller.text, 'image','address');
     } else {
       print('something wrong');
     }

@@ -7,5 +7,9 @@ class Recipesmodel {
   final String cuisine;
   final String mainIngredient;
 
-  Recipesmodel(this.title, this.cookTime, this.ingredients, this.photoUrl, this.cuisine, this.mainIngredient);
+  Recipesmodel(this.title, this.cookTime, this.ingredients, this.photoUrl, this.cuisine, this.mainIngredient,);
+
+
 }
+
+

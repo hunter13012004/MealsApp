@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
+import 'package:mealsapp/pages/cartpage.dart';
 import 'package:mealsapp/services/recipemodel.dart';
 
 import 'package:mealsapp/utils/addtocart.dart';
@@ -76,6 +76,7 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
   void addtocart(){
+    Navigator.push(context,MaterialPageRoute(builder: (context)=>const CartsPage()));
    final shop =context.read<shopProvider>();
 
   

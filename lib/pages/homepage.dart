@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/pages/cartpage.dart';
 import 'package:mealsapp/pages/loginpage.dart';
@@ -12,6 +11,7 @@ import 'package:mealsapp/services/recipeProvider.dart';
 import 'package:mealsapp/utils/customdivider.dart';
 import 'package:mealsapp/utils/customdrawer.dart';
 import 'package:mealsapp/utils/customexploretile.dart';
+import 'package:mealsapp/utils/homeaddress.dart';
 import 'package:mealsapp/utils/recipecard.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +23,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  List<int>? filterIndex;
+  bool Isfavorurite = false ;
   @override
   void initState() {
     // TODO: implement initState
@@ -34,6 +36,7 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+      
     return Consumer<imageProvider>(
       builder: (context, profilepicprovider, child) => Scaffold(
         backgroundColor: backgroundcolor,
@@ -72,25 +75,11 @@ class _HomepageState extends State<Homepage> {
               child: Consumer<RecipeProvider>(
                 builder: (context, value, child) => Column(
                   children: [
-                    Row(
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          Icons.location_on,
-                          size: 40,
-                          color: textcolor,
-                        ),
-                        Text(
-                          'Home',
-                          style: GoogleFonts.lato(
-                              textStyle: TextStyle(
-                                  color: textcolor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16)),
-                        ),
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: primarycolor,
-                        ),
+                       
+                       AddressPicker(),
+                       
                         SizedBox(
                           width: 230,
                         ),
@@ -220,10 +209,14 @@ class _HomepageState extends State<Homepage> {
                             cookTime: value.recipes[index].cookTime.toString(),
                             rating: value.recipes[index].cuisine,
                             thumbnailUrl: value.recipes[index].photoUrl,
-                            onlike: () {},
-                            icon: Icon(
-                              Icons.favorite_border_outlined,
-                            ),
+                            onlike:(){
+                              setState(() {
+                                addtolike();
+                              });
+                            },
+                            icon: Isfavorurite
+                                ? Icon(Icons.favorite)
+                                : Icon(Icons.favorite_border),
                             ontap: () {
                               Navigator.push(
                                   context,
@@ -244,13 +237,14 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  // void addtolike(){
+  void addtolike(){
 
-  //   setState(() {
-  //     Isfavorurite = !Isfavorurite;
+    setState(() {
+      Isfavorurite = !Isfavorurite;
+      Isfavorurite = !Isfavorurite;
 
-  //   });
-  // }
+    });
+  }
 
   void loguserout() {
     FirebaseAuth.instance.signOut();
