@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/pages/cartpage.dart';
+import 'package:mealsapp/pages/favouritrestro.dart';
 import 'package:mealsapp/pages/loginpage.dart';
 import 'package:mealsapp/pages/fooddetailpage.dart';
 import 'package:mealsapp/provider/imageprovider.dart';
@@ -23,11 +24,10 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  List<int>? filterIndex;
-  bool Isfavorurite = false ;
+  bool isFavorite = false;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<RecipeProvider>(context, listen: false).getAllRecipes();
@@ -36,25 +36,26 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-      
     return Consumer<imageProvider>(
       builder: (context, profilepicprovider, child) => Scaffold(
         backgroundColor: backgroundcolor,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text(
+          title: const Text(
             'M E A L S  A P P',
             style: TextStyle(color: textcolor),
           ),
           centerTitle: true,
           actions: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: IconButton(
-                icon: Icon(Icons.shopping_cart),
+                icon: const Icon(Icons.shopping_cart),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CartsPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartsPage()));
                 },
                 color: textcolor,
               ),
@@ -70,29 +71,28 @@ class _HomepageState extends State<Homepage> {
         body: DefaultTabController(
           length: 4,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: SingleChildScrollView(
               child: Consumer<RecipeProvider>(
                 builder: (context, value, child) => Column(
                   children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       
-                       AddressPicker(),
-                       
-                        SizedBox(
+                        const AddressPicker(),
+                        const SizedBox(
                           width: 230,
                         ),
                         CircleAvatar(
                           backgroundColor: Colors.black,
                           backgroundImage: profilepicprovider.image != null
                               ? FileImage(File(profilepicprovider.image!.path))
-                              : AssetImage('assets/images/man.png')
+                              : const AssetImage('assets/images/man.png')
                                   as ImageProvider<Object>,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     // SearchBars
@@ -112,23 +112,26 @@ class _HomepageState extends State<Homepage> {
                             width: 5,
                           ),
                           Expanded(
-                              child: TextField(
-                            decoration: InputDecoration(
+                            child: TextField(
+                              decoration: InputDecoration(
                                 hintText: 'Search',
                                 hintStyle: TextStyle(color: secondarycolor),
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide.none)),
-                          )),
+                                  borderSide: BorderSide.none,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
 
                     // For You Offer Tabs
-                    customdivider(dividertext: 'FOR YOU'),
-                    SizedBox(
+                    const customdivider(dividertext: 'FOR YOU'),
+                    const SizedBox(
                       height: 15,
                     ),
 
@@ -136,51 +139,62 @@ class _HomepageState extends State<Homepage> {
                     Container(
                       width: 120,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: secondarycolor),
+                        borderRadius: BorderRadius.circular(20),
+                        color: secondarycolor,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Homepage()));
-                              },
-                              icon: Icon(
-                                Icons.recommend,
-                                color: textcolor,
-                              )),
-                          Container(
-                              height: 50,
-                              child: VerticalDivider(
-                                thickness: 2,
-                              )),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Homepage(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(
+                              Icons.recommend,
+                              color: textcolor,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 50,
+                            child: VerticalDivider(
+                              thickness: 2,
+                            ),
+                          ),
                           IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.favorite,
-                                color: textcolor,
-                              ))
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const favoriteRestro()));
+                            },
+                            icon: const Icon(
+                              Icons.favorite,
+                              color: textcolor,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
 
                     // Foryoutile(OfferText: 'KFC', subtitle: '',),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     // explore tabs
-                    customdivider(dividertext: 'EXPLORE'),
-                    SizedBox(
+                    const customdivider(dividertext: 'EXPLORE'),
+                    const SizedBox(
                       height: 15,
                     ),
 
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         MyExploreTile(
@@ -189,44 +203,49 @@ class _HomepageState extends State<Homepage> {
                           image: '',
                         ),
                         MyExploreTile(
-                            OfferText: 'Play & Win',
-                            subtitle: 'Exiting Prizes',
-                            image: '')
+                          OfferText: 'Play & Win',
+                          subtitle: 'Exiting Prizes',
+                          image: '',
+                        ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     // whats on your mind tab
-                    customdivider(dividertext: 'WHAT\S ON YOUR MIND'),
+                    const customdivider(dividertext: 'WHAT\'S ON YOUR MIND'),
                     ListView.builder(
-                        itemCount: value.recipes.length,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return RecipeCard(
-                            title: value.recipes[index].title,
-                            cookTime: value.recipes[index].cookTime.toString(),
-                            rating: value.recipes[index].cuisine,
-                            thumbnailUrl: value.recipes[index].photoUrl,
-                            onlike:(){
-                              setState(() {
-                                addtolike();
-                              });
-                            },
-                            icon: Isfavorurite
-                                ? Icon(Icons.favorite)
-                                : Icon(Icons.favorite_border),
-                            ontap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DetailsPage(
-                                            recipe: value.recipes[index],
-                                          )));
-                            },
-                          );
-                        })
+                      itemCount: value.recipes.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return RecipeCard(
+                          title: value.recipes[index].title,
+                          cookTime: value.recipes[index].cookTime.toString(),
+                          rating: value.recipes[index].cuisine,
+                          thumbnailUrl: value.recipes[index].photoUrl,
+                          onLike: () {
+                            setState(() {
+                              isFavorite = !isFavorite;
+                            });
+                          },
+                          icon: isFavorite
+                              ? const Icon(Icons.favorite)
+                              : const Icon(Icons.favorite_border),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailsPage(
+                                  recipe: value.recipes[index],
+                                ),
+                              ),
+                            );
+                          },
+                          isFavorite: isFavorite,
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -237,18 +256,11 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  void addtolike(){
-
-    setState(() {
-      Isfavorurite = !Isfavorurite;
-      Isfavorurite = !Isfavorurite;
-
-    });
-  }
-
   void loguserout() {
     FirebaseAuth.instance.signOut();
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoginPage()));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    );
   }
 }

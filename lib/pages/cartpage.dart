@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
-import 'package:mealsapp/pages/paymentgatewaypage.dart';
+import 'package:mealsapp/pages/paymentscreen.dart';
 import 'package:mealsapp/provider/cartproivider.dart';
 import 'package:mealsapp/services/recipemodel.dart';
 import 'package:mealsapp/utils/cartCard.dart';
 import 'package:provider/provider.dart';
-
 class CartsPage extends StatefulWidget {
   const CartsPage({super.key});
 
   @override
-  State<CartsPage> createState() => _CartsPageState();
+  _CartsPageState createState() => _CartsPageState();
 }
-
 class _CartsPageState extends State<CartsPage> {
+  double totalAmount = 0; // Initialize totalAmount with 0
+
+  @override
+  void initState() {
+    super.initState();
+    calculateTotalAmount();
+  }
+
+  void calculateTotalAmount() {
+    final shopProvider = Provider.of<ShopProvider>(context, listen: false);
+    totalAmount = shopProvider.calculateTotal();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +40,6 @@ class _CartsPageState extends State<CartsPage> {
       body: Consumer<ShopProvider>(
         builder: (context, shopProvider, child) {
           final cartItems = shopProvider.cart;
-          final totalAmount = shopProvider.calculateTotal(); // Calculate total amount
 
           return Column(
             children: [
@@ -38,10 +48,11 @@ class _CartsPageState extends State<CartsPage> {
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
                     Recipesmodel item = cartItems[index];
+                    final totalPrice = item.price * item.count;
                     return CartCard(
                       Dishname: item.title,
                       ImagePath: item.photoUrl, 
-                      price: item.price.toString(), // Use actual item price
+                      price: totalPrice.toString(),
                       onPressedminus: () => onMinus(context, item),
                       onPressedadd: () => onAdd(context, item),
                       counter: item.count.toString(), 
@@ -79,9 +90,11 @@ class _CartsPageState extends State<CartsPage> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PaymentIntegrationPage()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>  PaytmPaymentPage(totalAmount: totalAmount,),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 50,
@@ -116,10 +129,14 @@ class _CartsPageState extends State<CartsPage> {
   void onMinus(BuildContext context, Recipesmodel item) {
     final shopProvider = Provider.of<ShopProvider>(context, listen: false);
     shopProvider.removeFromCart(item);
+    calculateTotalAmount();
+    setState(() {}); // Call setState to update the UI
   }
 
   void onAdd(BuildContext context, Recipesmodel item) {
     final shopProvider = Provider.of<ShopProvider>(context, listen: false);
     shopProvider.addToCart(item, 1);
+    calculateTotalAmount();
+    setState(() {}); // Call setState to update the UI
   }
 }

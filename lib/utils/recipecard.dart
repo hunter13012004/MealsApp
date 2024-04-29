@@ -6,22 +6,27 @@ class RecipeCard extends StatelessWidget {
   final String rating;
   final String cookTime;
   final String thumbnailUrl;
-  final Function() ontap;
-  final Function() onlike;
+  final Function() onTap;
+  final Function() onLike;
   final Widget icon;
-  const RecipeCard({super.key, 
+  final bool isFavorite;
+
+  const RecipeCard({
+    super.key, 
     required this.title,
     required this.cookTime,
     required this.rating,
     required this.thumbnailUrl,
-    required this.ontap,
-    required this.onlike,
+    required this.onTap,
+    required this.onLike,
     required this.icon,
+    required this.isFavorite,
   });
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ontap,
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
         width: MediaQuery.of(context).size.width,
@@ -127,8 +132,10 @@ class RecipeCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
-                  icon:icon,
-                  onPressed: onlike,
+                  icon: isFavorite
+                      ? const Icon(Icons.favorite)
+                      : const Icon(Icons.favorite_border),
+                  onPressed: onLike,
                 ),
               ),
             )

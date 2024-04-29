@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/functions/databaseFunctions.dart';
 import 'package:mealsapp/pages/homepage.dart';
@@ -23,6 +24,8 @@ class _signuserupState extends State<signuserup> {
   final TextEditingController passwordcontroller = TextEditingController();
   final TextEditingController usernamecontroller = TextEditingController();
   final TextEditingController confirmpasswordcontroller = TextEditingController();
+   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   final _signupFormKey = GlobalKey<FormState>();
 
@@ -222,13 +225,17 @@ class _signuserupState extends State<signuserup> {
                           const SizedBox(
                             height: 20,
                           ),
-                          const Row(
+                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               customcontainer(
+                                onTap: ()async{
+                                  await _signInWithGoogle(context);
+
+                                },
                                 imagepath: 'assets/images/google.png',
                               ),
-                              customcontainer(
+                              const customcontainer(
                                   imagepath: 'assets/images/facebook.png')
                             ],
                           )
@@ -252,6 +259,34 @@ class _signuserupState extends State<signuserup> {
       create('Users', usernamecontroller.text, usernamecontroller.text, emailcontroller.text, 'image','address');
     } else {
       print('something wrong');
+    }
+  }
+    Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential authResult = await _auth.signInWithCredential(credential);
+        final User? user = authResult.user;
+
+        if (user != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Homepage()), 
+          );
+        } else {
+          print('Failed to sign in with Google');
+        }
+      }
+    } catch (error) {
+      print('Error signing in with Google: $error');
     }
   }
 

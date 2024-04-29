@@ -1,115 +1,152 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 
-class restrocard extends StatelessWidget {
-  final String image;
-  final String restroname;
-  final String subtitle;
-  final String time;
+class RecipeCard extends StatefulWidget {
+  final String title;
   final String rating;
-  final void Function() ontap;
-  const restrocard(
-      {super.key,
-      required this.image,
-      required this.restroname,
-      required this.subtitle,
-      required this.time,
-      required this.rating,
-      required this.ontap});
+  final String cookTime;
+  final String thumbnailUrl;
+  final Function() onTap;
+
+  const RecipeCard({
+    super.key,
+    required this.title,
+    required this.cookTime,
+    required this.rating,
+    required this.thumbnailUrl,
+    required this.onTap,
+  });
+
+  @override
+  _RecipeCardState createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ontap,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Container(
-          child: Column(
-            children: [
-              ClipRRect(
-                  borderRadius: const BorderRadiusDirectional.only(
-                      topEnd: Radius.circular(20),
-                      topStart: Radius.circular(20)),
-                  child: Image.network(
-                    image,
-                    
-                    fit: BoxFit.cover,
-                    
-                  )),
-              Container(
-                height: 100,
-                width: 360,
-                decoration: BoxDecoration(
-                  color: secondarycolor,
-                  border: Border.all(color: primarycolor),
-                  borderRadius: const BorderRadiusDirectional.only(
-                    bottomEnd: Radius.circular(20),
-                    bottomStart: Radius.circular(20),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              restroname,
-                              style: const TextStyle(
-                                  fontSize: 20,
-                                  color: textcolor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: backgroundcolor,
-                                borderRadius: BorderRadius.circular(20)),
-                            height: 20,
-                            width: 50,
-                            child: Center(
-                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  rating,
-                                  style: const TextStyle(color: textcolor),
-                                ),
-                                const Icon(Icons.star_border,color: Colors.yellow,size: 20,)
-                              ],
-                            )),
-                          )
-                        ],
-                      ),
-                      Expanded(
-                        child: Text(
-                          subtitle,
-                          style: const TextStyle(
-                              fontSize: 14,
-                              color: textcolor,
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          const Icon(Icons.timelapse_rounded),
-                          Text(
-                            time,
-                            style: const TextStyle(
-                                fontSize: 12,
-                                color: textcolor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
+      onTap: widget.onTap,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+        width: MediaQuery.of(context).size.width,
+        height: 180,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.6),
+              offset: const Offset(
+                0.0,
+                10.0,
+              ),
+              blurRadius: 10.0,
+              spreadRadius: -6.0,
+            ),
+          ],
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+              backgroundcolor.withOpacity(0.70),
+              BlendMode.multiply,
+            ),
+            image: NetworkImage(widget.thumbnailUrl),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Text(
+                  widget.title,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    color: textcolor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                          size: 18,
+                        ),
+                        const SizedBox(width: 7),
+                        Text(
+                          widget.rating,
+                          style: const TextStyle(
+                            color: backgroundcolor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.schedule,
+                          color: Colors.yellow,
+                          size: 18,
+                        ),
+                        const SizedBox(width: 7),
+                        Text(
+                          widget.cookTime,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: isFavorite
+                      ? const Icon(Icons.favorite)
+                      : const Icon(Icons.favorite_border),
+                  onPressed: () {
+                    setState(() {
+                      isFavorite = !isFavorite;
+                    });
+                  },
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

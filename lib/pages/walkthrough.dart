@@ -29,7 +29,7 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
             });
             currentpageindex = value;
           },
-          children: <Widget>[
+          children: const <Widget>[
             WalkthroughPage(
               title: 'Discover Delicious Meals',
               description:
@@ -47,7 +47,7 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
             WalkthroughPage(
               title: 'Fresh Ingredients, Fast Delivery',
               description:
-                  'Description for Page 3 We source the freshest ingredients to ensure your meal is of the highest quality. Enjoy swift delivery right to your doorstep',
+                  ' We source the freshest ingredients to ensure your meal is of the highest quality. Enjoy swift delivery right to your doorstep',
               image:
                   'assets/images/ingredient.png', // Replace with your image path
             ),

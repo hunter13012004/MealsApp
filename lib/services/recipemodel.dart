@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Recipesmodel {
   final String title;
   final int cookTime;
@@ -15,8 +17,7 @@ class Recipesmodel {
     this.photoUrl,
     this.cuisine,
     this.mainIngredient,
-    this.price,
-    {this.count = 1}  // Initialize count with default value of 1
+    {required this.price, this.count = 1}  // Initialize count with default value of 1
   );
 
   // Factory constructor to create an instance from a JSON map
@@ -28,8 +29,8 @@ class Recipesmodel {
       json['photoUrl'] ?? '',
       json['cuisine'] ?? 'Unknown cuisine',
       json['mainIngredient'] ?? 'Unknown main ingredient',
-      json['price'] ?? 0,  // Assuming price is passed in JSON, default to 0 if not
-      count: 1  // Initialize count when creating from JSON
+      price: (Random().nextDouble() * 20 + 5).round(), // Generate random price
+      count: 1,  // Initialize count when creating from JSON
     );
   }
 }

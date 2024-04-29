@@ -16,9 +16,7 @@ class RecipeService {
       }).toList();
       return recipes;
     } else {
-      // Handle the case where the server did not return a 200 OK response.
-      // You might want to throw an exception or handle the error in a way that
-      // the calling code can understand.
+  
       throw Exception('Failed to load recipes');
     }
   }
