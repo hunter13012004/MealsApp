@@ -46,9 +46,8 @@ dependencies:
   hive_flutter: ^1.1.0
   data_filters: ^1.0.2
   google_sign_in: ^6.2.1
-  paytm: ^3.0.1
   upi_india: ^3.0.1
-  
+  logger: ^2.2.0
  
 
 dev_dependencies:
