@@ -1,20 +1,25 @@
 import 'dart:convert';
 
 import 'package:mealsapp/services/recipemodel.dart';
-import 'package:http/http.dart' as http ;
+import 'package:http/http.dart' as http;
 
-class RecipeService{
-  Future  getAll() async {
-const url = 'https://api.sampleapis.com/recipes/recipes';
-final uri =Uri.parse(url);
-final respone = await http.get(uri);
-if(respone.statusCode == 200){
-  final json = jsonDecode(respone.body) as List ;
-  final recipes = json.map((e){
-    return Recipesmodel(e['title'], e['cookTime'], e['ingredients'],e['photoUrl'] ,e['cuisine'], e['mainIngredient']);
-  }).toList();
-  return recipes; 
-}
-return [] ;
+class RecipeService {
+  Future<List<Recipesmodel>> getAll() async {
+    const url = 'https://api.sampleapis.com/recipes/recipes';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+    
+    if (response.statusCode == 200) {
+      final List<dynamic> json = jsonDecode(response.body);
+      final List<Recipesmodel> recipes = json.map((data) {
+        return Recipesmodel.fromJson(data);
+      }).toList();
+      return recipes;
+    } else {
+      // Handle the case where the server did not return a 200 OK response.
+      // You might want to throw an exception or handle the error in a way that
+      // the calling code can understand.
+      throw Exception('Failed to load recipes');
+    }
   }
 }

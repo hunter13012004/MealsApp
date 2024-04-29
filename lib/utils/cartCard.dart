@@ -4,17 +4,19 @@ import 'package:mealsapp/constants/colorspicker.dart';
 class CartCard extends StatelessWidget {
   final String Dishname;
   final String ImagePath;
-  final String price;
+  final String? price;
   final String counter;
   final void Function() onPressedminus;
   final void Function() onPressedadd;
+
   const CartCard({
     super.key,
     required this.Dishname,
     required this.ImagePath,
-    required this.price,
+    this.price,
     required this.onPressedminus,
-    required this.onPressedadd, required this.counter,
+    required this.onPressedadd,
+    this.counter = '1',
   });
 
   @override
@@ -22,63 +24,71 @@ class CartCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-          height: 80,
-          width: 400,
-          decoration: BoxDecoration(
-              color: secondarycolor,
-              border: Border.all(
-                color: Colors.white,
+        height: 100,
+        decoration: BoxDecoration(
+          color: secondarycolor,
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                ImagePath,
+                height: 80,
+                width: 80,
+                fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.circular(12)),
-          child: Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        ImagePath,
-                        
-                        height: 50,
-                      ))),
-              Column(
+            ),
+            Expanded(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     Dishname,
                     style: const TextStyle(
-                        fontSize: 18,
-                        color: textcolor,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 16,
+                      color: textcolor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
-                  Text('₹$price',
-                      style: const TextStyle(fontSize: 16, color: textcolor))
+                  if (price != null)
+                    Text(
+                      '₹$price',
+                      style: const TextStyle(fontSize: 16, color: textcolor),
+                    )
+                  else
+                    const Text(
+                      'Price not available',
+                      style: TextStyle(fontSize: 16, color: textcolor),
+                    ),
                 ],
               ),
-              const SizedBox(
-                width: 15,
-              ),
-              Container(
-                  width: 40,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: backgroundcolor),
-                  child: IconButton(
-                      onPressed: onPressedminus, icon: const Icon(Icons.remove))),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
+            ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: onPressedminus,
+                  icon: const Icon(Icons.remove),
+                ),
+                Text(
                   counter,
                   style: const TextStyle(fontSize: 20),
                 ),
-              ),
-              Container(
-                  width: 40,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: backgroundcolor),
-                  child: IconButton(
-                      onPressed: onPressedadd, icon: const Icon(Icons.add))),
-            ],
-          )),
+                IconButton(
+                  onPressed: onPressedadd,
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

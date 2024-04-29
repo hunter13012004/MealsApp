@@ -222,7 +222,7 @@ class _HomepageState extends State<Homepage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DetailsPage(
-                                            recipes: value.recipes[index],
+                                            recipe: value.recipes[index],
                                           )));
                             },
                           );

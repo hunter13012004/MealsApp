@@ -28,13 +28,7 @@ class _topContainerState extends State<topContainer> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      'Enter Your Full Name ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: textcolor),
-                    ),
+                    
                     Text(user.email.toString(),
                         style: const TextStyle(fontSize: 14, color: textcolor))
                   ],

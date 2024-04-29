@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mealsapp/constants/colorspicker.dart';
 import 'package:mealsapp/pages/cartpage.dart';
+import 'package:mealsapp/provider/cartproivider.dart';
 import 'package:mealsapp/services/recipemodel.dart';
-
-import 'package:mealsapp/utils/addtocart.dart';
+import 'package:mealsapp/utils/custombutton.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/cartproivider.dart';
-
 class DetailsPage extends StatefulWidget {
-  final Recipesmodel recipes;
+  final Recipesmodel recipe;
   
   const DetailsPage({
-    super.key,  required this.recipes,
+    super.key, required this.recipe,
   });
 
   @override
@@ -20,10 +18,6 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-
-
-  final String description =
-      'Indulge in a culinary journey with our Grilled Salmon served with a tantalizing Lemon Herb Butter sauce. Sourced from the freshest catch of the day, our salmon fillets are expertly seasoned and grilled to perfection, resulting in a succulent, flaky texture that melts in your mouth. Accompanied by a medley of seasonal vegetables, each bite offers a burst of vibrant flavors and wholesome goodness. Drizzled generously with our signature Lemon Herb Butter sauce, infused with zesty lemon and fragrant herbs, this dish elevates your dining experience to new heights. Whether you\'re a seafood enthusiast or a connoisseur of fine dining, our Grilled Salmon with Lemon Herb Butter promises to tantalize your taste buds and leave you craving for more';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,46 +33,50 @@ class _DetailsPageState extends State<DetailsPage> {
             },
             icon: const Icon(Icons.arrow_back)),
       ),
-      body: Stack(
-        children: [SingleChildScrollView(
-          child: Column( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(height: 300,width: double.maxFinite,
-                  child: ClipRRect(borderRadius: BorderRadius.circular(20),child: Image.network(widget.recipes.photoUrl,fit: BoxFit.cover,))),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-               widget.recipes.title,
-                style: const TextStyle(color: textcolor, fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-               Text('Cuisine: ${widget.recipes.cuisine} | Main Ingredient: ${widget.recipes.mainIngredient}'),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(widget.recipes.ingredients,
-                    style: const TextStyle(color: textcolor, fontSize: 16)),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Align(alignment: Alignment.bottomCenter,
-                  child: AddtoCart(
-                    onTap: addtocart,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 300,
+                width: double.maxFinite,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    widget.recipe.photoUrl,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-            ],
-          ),
-        ),]
+            ),
+            const SizedBox(height: 10),
+            Text(
+              widget.recipe.title,
+              style: const TextStyle(color: textcolor, fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Text('Cuisine: ${widget.recipe.cuisine} | Main Ingredient: ${widget.recipe.mainIngredient}'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.recipe.ingredients,
+                style: const TextStyle(color: textcolor, fontSize: 16),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: custombutton(text: 'ADD TO CART', onPressed: (){addtocart();})
+            ),
+          ],
+        ),
       ),
     );
   }
-  void addtocart(){
-    Navigator.push(context,MaterialPageRoute(builder: (context)=>const CartsPage()));
-   final shop =context.read<shopProvider>();
 
-  
+  void addtocart() {
+    final shopProvider = Provider.of<ShopProvider>(context, listen: false);
+    shopProvider.addToCart(widget.recipe, 1); 
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const CartsPage()));
   }
 }

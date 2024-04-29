@@ -89,11 +89,11 @@ class _signuserupState extends State<signuserup> {
             ),
             Expanded(
               child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
+               
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    height: 5000,
+                    height: 700,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: secondarycolor,
